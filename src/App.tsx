@@ -32,31 +32,23 @@ export function App() {
 }
 
 function Stack(props: {children: ComponentChildren}) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        flexGrow: 1,
-        alignItems: "stretch",
-      }}
-    >
-      {props.children}
-    </div>
-  )
+  const style = {
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1,
+    alignItems: "stretch",
+  }
+
+  return <div style={style}>{props.children}</div>
 }
 
 function Shelf(props: {children: ComponentChildren}) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexGrow: 1,
-        flexWrap: "wrap",
-        alignItems: "stretch",
-      }}
-    >
-      {props.children}
-    </div>
-  )
+  const style = {
+    display: "flex",
+    flexGrow: 1,
+    flexWrap: "wrap",
+    alignItems: "stretch",
+  }
+
+  return <div style={style}>{props.children}</div>
 }
