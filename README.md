@@ -2,6 +2,18 @@
 
 A lightweight system of layout components for Preact.
 
+TODO:
+
+- `<Shelf>` and `<Stack>` for vertical and horizontal flex containers.
+- `<Frame>` for justifying boxes (e.g. centering a box in another box)
+- `<Unit>` for hardcoding dimensions and disabling flex grow/shrink. Useful as struts in flex layout
+- `<Boundary>` for adding ambiguous borders between elements. 1px hairline by default.
+- `<Spring>` grows/shrinks to fill unused space in a flex container.
+
+Features:
+
+- Compatible with right-to-left layouts by default
+
 ## Development
 
 ### Server and Typechecker
