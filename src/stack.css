@@ -1,0 +1,9 @@
+.snug-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+:where(.snug-stack, .snug-spring) > .snug-stack {
+  flex-grow: 1;
+}

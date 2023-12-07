@@ -1,54 +1,48 @@
 import {h, ComponentChildren} from "preact"
-import "./app.css"
+import "./stack.css"
+import "./shelf.css"
+import "./spring.css"
 
 export function App() {
   return (
-    <Stack>
-      <div style={{background: "#ffc"}}>
-        <Stack>
-          <Shelf>
-            <div>
-              <Stack>
-                <div>foo</div>
-                <div>bar</div>
-              </Stack>
-            </div>
-            <div>kludge</div>
-          </Shelf>
-          <div>baz</div>
-        </Stack>
-      </div>
-      <div style={{background: "aliceblue", flexGrow: 1}}>
-        <h1>Text</h1>
-        <h1>Text</h1>
-        <h1>Text</h1>
-        <h1>Text</h1>
-        <h1>Text</h1>
-        <h1>Text</h1>
-      </div>
-      <div style={{background: "green"}}>three</div>
-    </Stack>
+    <Spring>
+      <Stack>
+        <div style={{background: "#ffc"}}>
+          <Stack>
+            <Shelf>
+              <div>
+                <Stack>
+                  <div>foo</div>
+                  <div>bar</div>
+                </Stack>
+              </div>
+              <div>kludge</div>
+            </Shelf>
+            <div>baz</div>
+          </Stack>
+        </div>
+        <div style={{background: "aliceblue", flexGrow: 1}}>
+          <h1>Text</h1>
+          <h1>Text</h1>
+          <h1>Text</h1>
+          <h1>Text</h1>
+          <h1>Text</h1>
+          <h1>Text</h1>
+        </div>
+        <div style={{background: "green"}}>three</div>
+      </Stack>
+    </Spring>
   )
 }
 
-function Stack(props: {children: ComponentChildren}) {
-  const style = {
-    display: "flex",
-    flexDirection: "column",
-    flexGrow: 1,
-    alignItems: "stretch",
-  }
+function Spring(props: {children: ComponentChildren}) {
+  return <div class="snug-spring">{props.children}</div>
+}
 
-  return <div style={style}>{props.children}</div>
+function Stack(props: {children: ComponentChildren}) {
+  return <div class="snug-stack">{props.children}</div>
 }
 
 function Shelf(props: {children: ComponentChildren}) {
-  const style = {
-    display: "flex",
-    flexGrow: 1,
-    flexWrap: "wrap",
-    alignItems: "stretch",
-  }
-
-  return <div style={style}>{props.children}</div>
+  return <div class="snug-shelf">{props.children}</div>
 }
