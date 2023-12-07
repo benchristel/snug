@@ -1,14 +1,6 @@
-# Preact, TypeScript, Vite, @benchristel/taste
+# Snug
 
-## Setup
-
-1. Click the "Use this template" button on GitHub
-2. Clone the created repo
-3. If this is your first ever JavaScript project, welcome! See [setting up a JavaScript development environment](https://gist.github.com/benchristel/ede6615bf1c6cf91fd5cda70f02f57d7) to get started.
-4. Run the one-time setup script to install dependencies and git hooks:
-   ```
-   yarn setup
-   ```
+A lightweight system of layout components for Preact.
 
 ## Development
 
