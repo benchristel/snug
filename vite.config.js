@@ -31,4 +31,11 @@ export default defineConfig({
       "react/jsx-runtime": "preact/jsx-runtime",
     },
   },
+  build: {
+    lib: {
+      name: "Snug",
+      entry: "src/index.tsx",
+      fileName: "index",
+    },
+  },
 })

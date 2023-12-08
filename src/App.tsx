@@ -22,6 +22,10 @@ export function App() {
               <a style={headerLink} href="#">
                 Menu 2
               </a>
+              <Spring />
+              <a style={headerLink} href="#">
+                This link is on the right
+              </a>
             </Shelf>
           </nav>
         </Header>
@@ -72,7 +76,7 @@ function Boundary(props: {color?: string; weight?: number | string}) {
   )
 }
 
-function Spring(props: {children: ComponentChildren}) {
+function Spring(props: {children?: ComponentChildren}) {
   return <div class="snug-spring">{props.children}</div>
 }
 

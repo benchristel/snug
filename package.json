@@ -1,7 +1,7 @@
 {
-  "name": "preact-typescript-vite-taste",
-  "version": "1.0.0",
-  "description": "Template app",
+  "name": "snug",
+  "version": "0.0.0",
+  "description": "Lightweight system of layout components for Preact",
   "main": "index.html",
   "license": "MIT",
   "devDependencies": {
