@@ -4,34 +4,71 @@ import "./shelf.css"
 import "./spring.css"
 
 export function App() {
+  const headerLink = {padding: "4px 12px", color: "#fff"}
   return (
     <Spring>
       <Stack>
-        <div style={{background: "#ffc"}}>
-          <Stack>
+        <Header>
+          <nav>
             <Shelf>
-              <div>
-                <Stack>
-                  <div>foo</div>
-                  <div>bar</div>
-                </Stack>
-              </div>
-              <div>kludge</div>
+              <a style={headerLink} href="#">
+                Company Name
+              </a>
+              <Boundary color="#aaa" />
+              <a style={headerLink} href="#">
+                Menu 1
+              </a>
+              <Boundary color="#aaa" />
+              <a style={headerLink} href="#">
+                Menu 2
+              </a>
             </Shelf>
-            <div>baz</div>
-          </Stack>
+          </nav>
+        </Header>
+        <Boundary color="#0ff" weight="3px" />
+        <Spring>
+          <Shelf>
+            <div style={{background: "aliceblue", padding: 16}}>
+              <h1>Sidebar</h1>
+            </div>
+            <Boundary />
+            <div
+              style={{background: "white", padding: 16, flexGrow: 1}}
+            >
+              <h1>Text</h1>
+              <h1>Text</h1>
+              <h1>Text</h1>
+              <h1>Text</h1>
+              <h1>Text</h1>
+              <h1>Text</h1>
+            </div>
+          </Shelf>
+        </Spring>
+        <div style={{background: "#444", color: "#fff", padding: 8}}>
+          This is the footer
         </div>
-        <div style={{background: "aliceblue", flexGrow: 1}}>
-          <h1>Text</h1>
-          <h1>Text</h1>
-          <h1>Text</h1>
-          <h1>Text</h1>
-          <h1>Text</h1>
-          <h1>Text</h1>
-        </div>
-        <div style={{background: "green"}}>three</div>
       </Stack>
     </Spring>
+  )
+}
+
+function Header(props: {children: ComponentChildren}) {
+  return (
+    <div style={{background: "#46f", color: "white", padding: 8}}>
+      {props.children}
+    </div>
+  )
+}
+
+function Boundary(props: {color?: string; weight?: number | string}) {
+  return (
+    <div
+      style={{
+        minWidth: props.weight ?? 1,
+        minHeight: props.weight ?? 1,
+        background: props.color ?? "#000",
+      }}
+    />
   )
 }
 
