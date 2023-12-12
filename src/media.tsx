@@ -1,5 +1,6 @@
 import {h, Fragment, ComponentChildren} from "preact"
 import {useEffect, useState} from "preact/hooks"
+import "./media.css"
 
 export function NarrowScreen(props: {
   children: ComponentChildren
@@ -25,6 +26,10 @@ export function WideScreen(props: {
   } else {
     return null
   }
+}
+
+export function NoPrint(props: {children: ComponentChildren}) {
+  return <div class="snug-media-no-print">{props.children}</div>
 }
 
 function useDocumentWidth() {

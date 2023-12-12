@@ -2,34 +2,36 @@ import {h, ComponentChildren} from "preact"
 import "./stack.css"
 import "./shelf.css"
 import "./spring.css"
-import {NarrowScreen, WideScreen} from "./screen-widths"
+import {NarrowScreen, WideScreen, NoPrint} from "./media"
 
 export function App() {
   const headerLink = {padding: "4px 12px", color: "#fff"}
   return (
     <Spring>
       <Stack>
-        <Header>
-          <nav>
-            <Shelf wrap>
-              <a style={headerLink} href="#">
-                Company Name
-              </a>
-              <Boundary color="#aaa" />
-              <a style={headerLink} href="#">
-                Menu 1
-              </a>
-              <Boundary color="#aaa" />
-              <a style={headerLink} href="#">
-                Menu 2
-              </a>
-              <Spring />
-              <a style={headerLink} href="#">
-                This link is on the right
-              </a>
-            </Shelf>
-          </nav>
-        </Header>
+        <NoPrint>
+          <Header>
+            <nav>
+              <Shelf wrap>
+                <a style={headerLink} href="#">
+                  Company Name
+                </a>
+                <Boundary color="#aaa" />
+                <a style={headerLink} href="#">
+                  Menu 1
+                </a>
+                <Boundary color="#aaa" />
+                <a style={headerLink} href="#">
+                  Menu 2
+                </a>
+                <Spring />
+                <a style={headerLink} href="#">
+                  This link is on the right
+                </a>
+              </Shelf>
+            </nav>
+          </Header>
+        </NoPrint>
         <Boundary color="#0ff" weight="3px" />
         <Spring>
           <Shelf>
