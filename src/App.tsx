@@ -2,6 +2,7 @@ import {h, ComponentChildren} from "preact"
 import "./stack.css"
 import "./shelf.css"
 import "./spring.css"
+import {NarrowScreen, WideScreen} from "./screen-widths"
 
 export function App() {
   const headerLink = {padding: "4px 12px", color: "#fff"}
@@ -72,7 +73,12 @@ export function App() {
           </Shelf>
         </Spring>
         <div style={{background: "#444", color: "#fff", padding: 8}}>
-          This is the footer
+          <NarrowScreen breakpoint={600}>
+            Your window is &lt;= 600px wide.
+          </NarrowScreen>
+          <WideScreen breakpoint={600}>
+            Your window is more than 600px wide.
+          </WideScreen>
         </div>
       </Stack>
     </Spring>
