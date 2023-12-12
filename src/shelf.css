@@ -1,7 +1,10 @@
 .snug-shelf {
   display: flex;
-  flex-wrap: wrap;
   align-items: stretch;
+}
+
+.snug-shelf.wrap {
+  flex-wrap: wrap;
 }
 
 :where(.snug-shelf, .snug-spring) > .snug-shelf {

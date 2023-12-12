@@ -10,7 +10,7 @@ export function App() {
       <Stack>
         <Header>
           <nav>
-            <Shelf>
+            <Shelf wrap>
               <a style={headerLink} href="#">
                 Company Name
               </a>
@@ -32,12 +32,35 @@ export function App() {
         <Boundary color="#0ff" weight="3px" />
         <Spring>
           <Shelf>
-            <div style={{background: "aliceblue", padding: 16}}>
+            <div
+              style={{
+                background: "aliceblue",
+                padding: 16,
+                overflow: "auto",
+              }}
+            >
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
+
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
+              <h1>Sidebar</h1>
               <h1>Sidebar</h1>
             </div>
             <Boundary />
             <div
-              style={{background: "white", padding: 16, flexGrow: 1}}
+              style={{
+                background: "white",
+                padding: 16,
+                flexGrow: 1,
+                overflow: "auto",
+              }}
             >
               <h1>Text</h1>
               <h1>Text</h1>
@@ -84,6 +107,10 @@ function Stack(props: {children: ComponentChildren}) {
   return <div class="snug-stack">{props.children}</div>
 }
 
-function Shelf(props: {children: ComponentChildren}) {
-  return <div class="snug-shelf">{props.children}</div>
+function Shelf(props: {children: ComponentChildren; wrap?: boolean}) {
+  return (
+    <div class={`snug-shelf ${props.wrap ? "wrap" : ""}`}>
+      {props.children}
+    </div>
+  )
 }
