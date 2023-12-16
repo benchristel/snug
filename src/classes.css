@@ -31,9 +31,17 @@
  * display a scrollbar.
  */
 .snug.snug-if-large-content-scroll {
-  flex-basis: var(--min-scroll-container-height);
   flex-shrink: 1;
   overflow: auto;
+}
+
+/* if the element is set to expand as well as scroll, set the flex basis to a small
+ * value. Otherwise, the parent element will derive its own flex basis based on the
+ * intrinsic size of this element's content, and scrollbars will not appear; the
+ * parent will grow instead.
+ */
+.snug.snug-if-large-content-scroll.snug-expand {
+  flex-basis: var(--min-scroll-container-height);
 }
 
 .snug.snug-layout-children-row {
