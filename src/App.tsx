@@ -139,12 +139,7 @@ function MultipleScrollingSections() {
 
       <Snug expand style={aliceblue}>
         <h1>Multiple Scrolling Sections</h1>
-        <Snug
-          typography
-          scroll
-          expand
-          style={{minHeight: 100, background: "#cfc"}}
-        >
+        <Snug typography scroll expand style={{background: "#cfc"}}>
           <p>Lorem ipsum dolor sit amet</p>
           <p>Lorem ipsum dolor sit amet</p>
           <p>Lorem ipsum dolor sit amet</p>
@@ -156,7 +151,6 @@ function MultipleScrollingSections() {
         <Snug
           typography
           scroll
-          expand
           style={{minHeight: 100, background: "#fcc"}}
         >
           <p>Lorem ipsum dolor sit amet</p>
