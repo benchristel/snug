@@ -1,123 +1,98 @@
-import {h, ComponentChildren} from "preact"
-import "./stack.css"
-import "./shelf.css"
-import "./spring.css"
-import {NarrowScreen, WideScreen, NoPrint} from "./media"
+import {h, Fragment, ComponentChildren} from "preact"
+import {CSSProperties} from "preact/compat"
+
+import "./classes.css"
 
 export function App() {
-  const headerLink = {padding: "4px 12px", color: "#fff"}
   return (
-    <Spring>
-      <Stack>
-        <NoPrint>
-          <Header>
-            <nav>
-              <Shelf wrap>
-                <a style={headerLink} href="#">
-                  Company Name
-                </a>
-                <Boundary color="#aaa" />
-                <a style={headerLink} href="#">
-                  Menu 1
-                </a>
-                <Boundary color="#aaa" />
-                <a style={headerLink} href="#">
-                  Menu 2
-                </a>
-                <Spring />
-                <a style={headerLink} href="#">
-                  This link is on the right
-                </a>
-              </Shelf>
-            </nav>
-          </Header>
-        </NoPrint>
-        <Boundary color="#0ff" weight="3px" />
-        <Spring>
-          <Shelf>
-            <div
-              style={{
-                background: "aliceblue",
-                padding: 16,
-                overflow: "auto",
-              }}
-            >
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
+    <Snug style={{background: "aliceblue"}} column expand>
+      <Snug
+        row
+        style={{background: "#444", color: "white", padding: 12}}
+      >
+        Header
+      </Snug>
+      <Snug scroll expand>
+        <h1>Text</h1>
+        <h1>Text</h1>
+        <h1>Text</h1>
+        <h1>Text</h1>
+      </Snug>
 
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-              <h1>Sidebar</h1>
-            </div>
-            <Boundary />
-            <div
-              style={{
-                background: "white",
-                padding: 16,
-                flexGrow: 1,
-                overflow: "auto",
-              }}
-            >
-              <h1>Text</h1>
-              <h1>Text</h1>
-              <h1>Text</h1>
-              <h1>Text</h1>
-              <h1>Text</h1>
-              <h1>Text</h1>
-            </div>
-          </Shelf>
-        </Spring>
-        <div style={{background: "#444", color: "#fff", padding: 8}}>
-          <NarrowScreen breakpoint={600}>
-            Your window is &lt;= 600px wide.
-          </NarrowScreen>
-          <WideScreen breakpoint={600}>
-            Your window is more than 600px wide.
-          </WideScreen>
-        </div>
-      </Stack>
-    </Spring>
+      <Snug
+        row
+        style={{background: "#444", color: "white", padding: 12}}
+      >
+        Footer
+      </Snug>
+    </Snug>
   )
 }
 
-function Header(props: {children: ComponentChildren}) {
-  return (
-    <div style={{background: "#46f", color: "white", padding: 8}}>
-      {props.children}
-    </div>
-  )
-}
+type SnugProps = {
+  children?: ComponentChildren
+  expand?: boolean
+  scroll?: boolean
+  style?: CSSProperties
+} & LayoutChildrenOptions
 
-function Boundary(props: {color?: string; weight?: number | string}) {
+type LayoutChildrenOptions =
+  | {}
+  | {
+      "column": true
+      "row"?: never
+      "row-wrap"?: never
+      "typography"?: never
+    }
+  | {
+      "column"?: never
+      "row": true
+      "row-wrap"?: never
+      "typography"?: never
+    }
+  | {
+      "column"?: never
+      "row"?: never
+      "row-wrap": true
+      "typography"?: never
+    }
+  | {
+      "column"?: never
+      "row"?: never
+      "row-wrap"?: never
+      "typography": true
+    }
+
+function Snug(props: SnugProps) {
+  const {scroll = false} = props
+
+  const layoutChildren = (() => {
+    if ("row" in props) {
+      return "row"
+    }
+    if ("row-wrap" in props) {
+      return "row-wrap"
+    }
+    if ("column" in props) {
+      return "column"
+    }
+    if ("typography" in props) {
+      return "typography"
+    }
+  })()
+
+  const classes = [
+    "snug",
+    props.expand && "snug-expand",
+    `snug-if-large-content-${scroll ? "scroll" : "stretch"}`,
+    `snug-layout-children-${layoutChildren}`,
+  ]
+
   return (
     <div
-      style={{
-        minWidth: props.weight ?? 1,
-        minHeight: props.weight ?? 1,
-        background: props.color ?? "#000",
-      }}
-    />
-  )
-}
-
-function Spring(props: {children?: ComponentChildren}) {
-  return <div class="snug-spring">{props.children}</div>
-}
-
-function Stack(props: {children: ComponentChildren}) {
-  return <div class="snug-stack">{props.children}</div>
-}
-
-function Shelf(props: {children: ComponentChildren; wrap?: boolean}) {
-  return (
-    <div class={`snug-shelf ${props.wrap ? "wrap" : ""}`}>
+      class={classes.filter(Boolean).join(" ")}
+      style={props.style}
+    >
       {props.children}
     </div>
   )
