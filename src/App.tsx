@@ -5,14 +5,14 @@ import "./classes.css"
 
 export function App() {
   return (
-    <Snug style={{background: "aliceblue"}} column expand>
+    <Snug column expand>
       <Snug
         row
         style={{background: "#444", color: "white", padding: 12}}
       >
         Header
       </Snug>
-      <Snug scroll expand>
+      <Snug style={{background: "aliceblue"}} expand scroll>
         <h1>Text</h1>
         <h1>Text</h1>
         <h1>Text</h1>

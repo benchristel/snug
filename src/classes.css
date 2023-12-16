@@ -1,3 +1,7 @@
+:root {
+  --min-scroll-container-height: 60px;
+}
+
 .snug {
   display: flex;
   flex-direction: column;
@@ -19,7 +23,7 @@
  * will be hidden.
  */
 .snug.snug-if-large-content-stretch {
-  flex-shrink: 0; /* TODO: is this class needed? flex-shrink: 0 is the default */
+  flex-shrink: 0;
 }
 
 /* if the content is too large for the available space in the (flex) parent
@@ -27,6 +31,7 @@
  * display a scrollbar.
  */
 .snug.snug-if-large-content-scroll {
+  flex-basis: var(--min-scroll-container-height);
   flex-shrink: 1;
   overflow: auto;
 }
