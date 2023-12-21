@@ -38,7 +38,7 @@ type LayoutChildrenOptions =
     }
 
 export function Snug(props: SnugProps) {
-  const {scroll = false} = props
+  const {scroll = false, style = {}} = props
 
   const layoutChildren = (() => {
     if ("row" in props) {
@@ -60,6 +60,8 @@ export function Snug(props: SnugProps) {
     props.expand && "snug-expand",
     `snug-if-large-content-${scroll ? "scroll" : "stretch"}`,
     `snug-layout-children-${layoutChildren}`,
+    ("height" in style || "minHeight" in style) &&
+      "snug-fixed-height",
   ]
 
   return (

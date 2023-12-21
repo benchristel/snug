@@ -137,8 +137,18 @@ function MultipleScrollingSections() {
 
       <Snug expand style={aliceblue}>
         <h1>Multiple Scrolling Sections</h1>
-        <Snug typography scroll expand style={{background: "#cfc"}}>
-          <p>Lorem ipsum dolor sit amet</p>
+        <Snug
+          typography
+          scroll
+          style={{background: "#cfc", height: 150}}
+        >
+          <p>
+            These (green and red) sections always stay at a fixed
+            height.
+          </p>
+          <p>
+            Since the content overflows, they will have scrollbars.
+          </p>
           <p>Lorem ipsum dolor sit amet</p>
           <p>Lorem ipsum dolor sit amet</p>
           <p>Lorem ipsum dolor sit amet</p>
@@ -149,7 +159,7 @@ function MultipleScrollingSections() {
         <Snug
           typography
           scroll
-          style={{minHeight: 100, background: "#fcc"}}
+          style={{background: "#fcc", height: 150}}
         >
           <p>Lorem ipsum dolor sit amet</p>
           <p>Lorem ipsum dolor sit amet</p>

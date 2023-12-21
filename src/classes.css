@@ -35,6 +35,10 @@
   overflow: auto;
 }
 
+.snug.snug-if-large-content-scroll.snug-fixed-height {
+  flex-basis: auto;
+}
+
 /* if the element is set to expand as well as scroll, set the flex basis to a small
  * value. Otherwise, the parent element will derive its own flex basis based on the
  * intrinsic size of this element's content, and scrollbars will not appear; the
