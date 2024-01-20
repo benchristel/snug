@@ -18,21 +18,19 @@ function HeaderMainFooter() {
   return (
     <Module style={{background: "lightgray"}}>
       <Stack>
-        <Region>This is the header</Region>
-        <Region expand>
-          <Module scroll style={{background: "lightgreen"}}>
-            <p>
-              In this example, the header and footer are fixed to the
-              top and bottom of the viewport.
-            </p>
-            <p>
-              When the content is too big to fit on screen, this
-              middle section scrolls.
-            </p>
-            <Expander />
-          </Module>
-        </Region>
-        <Region>This is the footer</Region>
+        <Cubby>This is the header</Cubby>
+        <Expanse scroll style={{background: "lightgreen"}}>
+          <p>
+            In this example, the header and footer are fixed to the
+            top and bottom of the viewport.
+          </p>
+          <p>
+            When the content is too big to fit on screen, this middle
+            section scrolls.
+          </p>
+          <Expander />
+        </Expanse>
+        <Cubby>This is the footer</Cubby>
       </Stack>
     </Module>
   )
@@ -42,30 +40,28 @@ function HeaderBody() {
   return (
     <Module style={{background: "lightgray"}}>
       <Stack>
-        <Region>This is the header</Region>
-        <Region expand>
-          <Module scroll style={{background: "lightgreen"}}>
-            <Stack>
-              <Region expand>
-                <p>
-                  In this example, the header is fixed to the top of
-                  the screen. The rest of the page scrolls.
-                </p>
-                <p>
-                  If the content is too small to occupy the entire
-                  screen, the footer sticks to the bottom of the
-                  viewport.
-                </p>
-                <Expander />
-              </Region>
-              <Region>
-                <div style={{background: "aliceblue"}}>
-                  This is the footer
-                </div>
-              </Region>
-            </Stack>
-          </Module>
-        </Region>
+        <Cubby>This is the header</Cubby>
+        <Expanse scroll style={{background: "lightgreen"}}>
+          <Stack>
+            <Cubby expand>
+              <p>
+                In this example, the header is fixed to the top of the
+                screen. The rest of the page scrolls.
+              </p>
+              <p>
+                If the content is too small to occupy the entire
+                screen, the footer sticks to the bottom of the
+                viewport.
+              </p>
+              <Expander />
+            </Cubby>
+            <Cubby>
+              <div style={{background: "aliceblue"}}>
+                This is the footer
+              </div>
+            </Cubby>
+          </Stack>
+        </Expanse>
       </Stack>
     </Module>
   )
@@ -87,10 +83,7 @@ function Expander() {
 
 const tarp = {
   position: "absolute",
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
+  inset: 0,
 }
 
 function Module(props: {
@@ -118,7 +111,21 @@ function Stack(props: {children: ComponentChildren}) {
   )
 }
 
-function Region(props: {
+function Expanse(props: {
+  children?: ComponentChildren
+  style?: CSSProperties
+  scroll?: boolean
+}) {
+  return (
+    <Cubby expand>
+      <Module style={props.style} scroll={props.scroll}>
+        {props.children}
+      </Module>
+    </Cubby>
+  )
+}
+
+function Cubby(props: {
   children: ComponentChildren
   expand?: boolean
 }) {
