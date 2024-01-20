@@ -10,6 +10,9 @@ export function Demos() {
       <Demo>
         <HeaderBody />
       </Demo>
+      <Demo>
+        <Sidebar />
+      </Demo>
     </>
   )
 }
@@ -62,6 +65,26 @@ function HeaderBody() {
   )
 }
 
+function Sidebar() {
+  return (
+    <Stack style={{background: "lightgray"}}>
+      <Cubby>This is the header</Cubby>
+      <Expanse scroll style={{background: "lightgreen"}}>
+        <Shelf>
+          <Cubby>Sidebar</Cubby>
+          <Expanse scroll style={{background: "aliceblue"}}>
+            <p>
+              In this example, the content scrolls while the sidebar
+              and header remain fixed.
+            </p>
+            <Expander />
+          </Expanse>
+        </Shelf>
+      </Expanse>
+    </Stack>
+  )
+}
+
 function Expander() {
   return (
     <details>
@@ -101,6 +124,26 @@ function Stack(props: {
         display: "flex",
         flexDirection: "column",
         alignItems: "stretch",
+        ...tarp,
+        ...props.style,
+      }}
+    >
+      {props.children}
+    </div>
+  )
+}
+
+function Shelf(props: {
+  children: ComponentChildren
+  style?: CSSProperties
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "stretch",
+        flexWrap: "wrap",
         ...tarp,
         ...props.style,
       }}
