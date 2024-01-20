@@ -4,4 +4,4 @@ import "./test-results"
 import "./reset.css"
 import "./global-types"
 
-render(<Demos />, document.body)
+render(<Demos />, document.getElementById("app")!)

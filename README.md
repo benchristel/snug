@@ -1,16 +1,18 @@
 # Snug
 
-A lightweight system of layout components for Preact.
+A lightweight system of layout components for Preact, inspired by beautiful carpentry.
 
-TODO:
+## The Components
 
-- `<Shelf>` and `<Stack>` for vertical and horizontal flex containers.
-- `<Frame>` for justifying boxes (e.g. centering a box in another box)
-- `<Unit>` for hardcoding dimensions and disabling flex grow/shrink. Useful as struts in flex layout
-- `<Boundary>` for adding ambiguous borders between elements. 1px hairline by default.
-- `<Spring>` grows/shrinks to fill unused space in a flex container.
+Snug is a thin but opinionated wrapper around flexbox. It is based around the following concepts:
 
-Features:
+- `<Stack>` and `<Shelf>` create vertical and horizontal flex containers, respectively.
+- Within a Stack or Shelf, a `<Region>` creates an invisible area. By default, a Region is exactly as big as it needs to be
+  to fit its content, and a Stack or Shelf is only as big as it needs to be to hold all its Regions. However...
+- `<Region expand>` (TODO: create a separate component for this) creates an expanding region that will fill all the space not taken up by other Regions in the same Stack or Shelf. Its child should be a `<Module>`.
+- A `<Module>` is an absolutely positioned element with `inset: 0`. It stretches itself to the edges of its nearest positioned ancestor and sticks there, like an overprotective tarp. Typically, a Module is the topmost component of a Snug layout, because if it has no positioned ancestor then it will cover the entire viewport, which is usually what you want. Since Regions have `position: relative`, a Module inside a Region will cover that Region. Unlike Regions, Modules accept a `style` prop, so you can give them an appearance. By default, Modules do not have a scrollbar, and any content that does not fit within them will be hidden. You can make a Module scrollable by adding a `scroll` prop.
+
+## Features
 
 - Compatible with right-to-left layouts by default
 

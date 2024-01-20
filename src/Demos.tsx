@@ -1,195 +1,156 @@
 import {h, Fragment, ComponentChildren} from "preact"
-import {Snug} from "./snug"
-
-const header = {
-  background: "#444",
-  color: "white",
-  padding: 12,
-  gap: 30,
-}
-
-const aliceblue = {background: "aliceblue"}
+import {CSSProperties} from "preact/compat"
 
 export function Demos() {
   return (
     <>
       <Demo>
-        <FixedHeaderAndFooterScrollingContent />
+        <HeaderMainFooter />
       </Demo>
       <Demo>
-        <FixedHeaderScrollingContent />
-      </Demo>
-      <Demo>
-        <WholePageScrollsFooterStaysAtBottom />
-      </Demo>
-      <Demo>
-        <MultipleScrollingSections />
+        <HeaderBody />
       </Demo>
     </>
   )
 }
 
-function FixedHeaderAndFooterScrollingContent() {
+function HeaderMainFooter() {
   return (
-    <Snug expand>
-      <Snug row style={header}>
-        <div>These</div>
-        <div>Elements</div>
-        <div>Are</div>
-        <div>In</div>
-        <div>A</div>
-        <div>Row</div>
-      </Snug>
-
-      <Snug scroll expand typography style={aliceblue}>
-        <h1>Fixed Header and Footer, Scrolling Content</h1>
-        <p>Lorem ipsum dolor sit amet</p>
-        <p>Lorem ipsum dolor sit amet</p>
-        <p>Lorem ipsum dolor sit amet</p>
-        <p>Lorem ipsum dolor sit amet</p>
-        <p>Lorem ipsum dolor sit amet</p>
-      </Snug>
-
-      <Snug row style={header}>
-        Footer
-      </Snug>
-    </Snug>
+    <Module style={{background: "lightgray"}}>
+      <Stack>
+        <Region>This is the header</Region>
+        <Region expand>
+          <Module scroll style={{background: "lightgreen"}}>
+            <p>
+              In this example, the header and footer are fixed to the
+              top and bottom of the viewport.
+            </p>
+            <p>
+              When the content is too big to fit on screen, this
+              middle section scrolls.
+            </p>
+            <Expander />
+          </Module>
+        </Region>
+        <Region>This is the footer</Region>
+      </Stack>
+    </Module>
   )
 }
 
-function FixedHeaderScrollingContent() {
+function HeaderBody() {
   return (
-    <Snug expand>
-      <Snug row style={header}>
-        <div>These</div>
-        <div>Elements</div>
-        <div>Are</div>
-        <div>In</div>
-        <div>A</div>
-        <div>Row</div>
-      </Snug>
-
-      <Snug scroll expand>
-        <Snug typography expand style={aliceblue}>
-          <h1>Fixed Header, Footer Stays at Bottom</h1>
-          <p>
-            If the content fits entirely within the viewport, the
-            footer will always be at the bottom. Otherwise, the
-            content and footer will scroll while the header stays at
-            the top of the viewport.
-          </p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-        </Snug>
-
-        <Snug row style={header}>
-          Footer
-        </Snug>
-      </Snug>
-    </Snug>
+    <Module style={{background: "lightgray"}}>
+      <Stack>
+        <Region>This is the header</Region>
+        <Region expand>
+          <Module scroll style={{background: "lightgreen"}}>
+            <Stack>
+              <Region expand>
+                <p>
+                  In this example, the header is fixed to the top of
+                  the screen. The rest of the page scrolls.
+                </p>
+                <p>
+                  If the content is too small to occupy the entire
+                  screen, the footer sticks to the bottom of the
+                  viewport.
+                </p>
+                <Expander />
+              </Region>
+              <Region>
+                <div style={{background: "aliceblue"}}>
+                  This is the footer
+                </div>
+              </Region>
+            </Stack>
+          </Module>
+        </Region>
+      </Stack>
+    </Module>
   )
 }
 
-function WholePageScrollsFooterStaysAtBottom() {
+function Expander() {
   return (
-    <Snug scroll expand>
-      <Snug row style={header}>
-        <div>These</div>
-        <div>Elements</div>
-        <div>Are</div>
-        <div>In</div>
-        <div>A</div>
-        <div>Row</div>
-      </Snug>
+    <details>
+      <summary>Expand me</summary>
 
-      <Snug expand>
-        <Snug typography expand style={aliceblue}>
-          <h1>Whole Page Scrolls, Footer Stays at Bottom</h1>
-          <p>
-            The whole page scrolls. If the content fits entirely
-            within the viewport, the footer sticks to the bottom.
-          </p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-        </Snug>
-
-        <Snug row style={header}>
-          Footer
-        </Snug>
-      </Snug>
-    </Snug>
+      <h1>Hello</h1>
+      <h1>Hello</h1>
+      <h1>Hello</h1>
+      <h1>Hello</h1>
+      <h1>Hello</h1>
+    </details>
   )
 }
 
-function MultipleScrollingSections() {
+const tarp = {
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+}
+
+function Module(props: {
+  children: ComponentChildren
+  style?: CSSProperties
+  scroll?: boolean
+}) {
+  const {children, style, scroll} = props
+  const overflow = scroll ? "auto" : "hidden"
+  return <div style={{overflow, ...tarp, ...style}}>{children}</div>
+}
+
+function Stack(props: {children: ComponentChildren}) {
   return (
-    <Snug scroll expand>
-      <Snug row style={header}>
-        <div>These</div>
-        <div>Elements</div>
-        <div>Are</div>
-        <div>In</div>
-        <div>A</div>
-        <div>Row</div>
-      </Snug>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "stretch",
+        ...tarp,
+      }}
+    >
+      {props.children}
+    </div>
+  )
+}
 
-      <Snug expand style={aliceblue}>
-        <h1>Multiple Scrolling Sections</h1>
-        <Snug
-          typography
-          scroll
-          style={{background: "#cfc", height: 150}}
-        >
-          <p>
-            These (green and red) sections always stay at a fixed
-            height.
-          </p>
-          <p>
-            Since the content overflows, they will have scrollbars.
-          </p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-        </Snug>
-
-        <Snug
-          typography
-          scroll
-          style={{background: "#fcc", height: 150}}
-        >
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
-        </Snug>
-      </Snug>
-
-      <Snug row style={header}>
-        Footer
-      </Snug>
-    </Snug>
+function Region(props: {
+  children: ComponentChildren
+  expand?: boolean
+}) {
+  return (
+    <div
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        flexGrow: props.expand ? 1 : 0,
+        flexShrink: 0,
+      }}
+    >
+      {props.children}
+    </div>
   )
 }
 
 function Demo(props: {children: ComponentChildren}) {
+  const padding = 20
+  const width = 400
+  const height = 400
   return (
-    <div style={{padding: 12, minHeight: "80vh"}}>
+    <div style={{width, height, padding, float: "left"}}>
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          margin: 16,
-          width: 600,
-          height: 300,
+          position: "relative",
+          width: width - padding * 2,
+          height: height - padding * 2,
           border: "2px solid red",
           overflow: "auto",
           resize: "both",
+          background: "white",
         }}
       >
         {props.children}
