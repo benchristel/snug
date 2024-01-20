@@ -16,54 +16,49 @@ export function Demos() {
 
 function HeaderMainFooter() {
   return (
-    <Module style={{background: "lightgray"}}>
-      <Stack>
-        <Cubby>This is the header</Cubby>
-        <Expanse scroll style={{background: "lightgreen"}}>
-          <p>
-            In this example, the header and footer are fixed to the
-            top and bottom of the viewport.
-          </p>
-          <p>
-            When the content is too big to fit on screen, this middle
-            section scrolls.
-          </p>
-          <Expander />
-        </Expanse>
-        <Cubby>This is the footer</Cubby>
-      </Stack>
-    </Module>
+    <Stack style={{background: "lightgray"}}>
+      <Cubby>This is the header</Cubby>
+      <Expanse scroll style={{background: "lightgreen"}}>
+        <p>
+          In this example, the header and footer are fixed to the top
+          and bottom of the viewport.
+        </p>
+        <p>
+          When the content is too big to fit on screen, this middle
+          section scrolls.
+        </p>
+        <Expander />
+      </Expanse>
+      <Cubby>This is the footer</Cubby>
+    </Stack>
   )
 }
 
 function HeaderBody() {
   return (
-    <Module style={{background: "lightgray"}}>
-      <Stack>
-        <Cubby>This is the header</Cubby>
-        <Expanse scroll style={{background: "lightgreen"}}>
-          <Stack>
-            <Cubby expand>
-              <p>
-                In this example, the header is fixed to the top of the
-                screen. The rest of the page scrolls.
-              </p>
-              <p>
-                If the content is too small to occupy the entire
-                screen, the footer sticks to the bottom of the
-                viewport.
-              </p>
-              <Expander />
-            </Cubby>
-            <Cubby>
-              <div style={{background: "aliceblue"}}>
-                This is the footer
-              </div>
-            </Cubby>
-          </Stack>
-        </Expanse>
-      </Stack>
-    </Module>
+    <Stack style={{background: "lightgray"}}>
+      <Cubby>This is the header</Cubby>
+      <Expanse scroll style={{background: "lightgreen"}}>
+        <Stack>
+          <Cubby expand>
+            <p>
+              In this example, the header is fixed to the top of the
+              screen. The rest of the page scrolls.
+            </p>
+            <p>
+              If the content is too small to occupy the entire screen,
+              the footer sticks to the bottom of the viewport.
+            </p>
+            <Expander />
+          </Cubby>
+          <Cubby>
+            <div style={{background: "aliceblue"}}>
+              This is the footer
+            </div>
+          </Cubby>
+        </Stack>
+      </Expanse>
+    </Stack>
   )
 }
 
@@ -96,7 +91,10 @@ function Module(props: {
   return <div style={{overflow, ...tarp, ...style}}>{children}</div>
 }
 
-function Stack(props: {children: ComponentChildren}) {
+function Stack(props: {
+  children: ComponentChildren
+  style?: CSSProperties
+}) {
   return (
     <div
       style={{
@@ -104,6 +102,7 @@ function Stack(props: {children: ComponentChildren}) {
         flexDirection: "column",
         alignItems: "stretch",
         ...tarp,
+        ...props.style,
       }}
     >
       {props.children}
