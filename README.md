@@ -6,10 +6,14 @@ A lightweight system of layout components for Preact, inspired by beautiful carp
 
 Snug is a thin but opinionated wrapper around flexbox. It is based around the following concepts:
 
-- `<Stack>` and `<Shelf>` create vertical and horizontal flex containers, respectively.
-- Within a Stack or Shelf, a `<Cubby>` creates a box that is just big enough to fit its content. Cubbies are typically used for headers, footers, and sidebars.
-- By contrast, an `<Expanse>` creates an expanding region that will fill all the space not taken up by the Cubbies in the same Stack or Shelf.
-- A `<Module>` is an absolutely positioned element with `inset: 0`. It stretches itself to the edges of its nearest positioned ancestor and sticks there, like an overprotective tarp. Typically, a Module is the topmost component of a Snug layout, because if it has no positioned ancestor then it will cover the entire viewport, which is usually what you want. Since Regions have `position: relative`, a Module inside a Region will cover that Region. Unlike Regions, Modules accept a `style` prop, so you can give them an appearance. By default, Modules do not have a scrollbar, and any content that does not fit within them will be hidden. You can make a Module scrollable by adding a `scroll` prop.
+- `<Stack>` and `<Shelf>` create vertical and horizontal flex containers, respectively. They are absolutely positioned elements with `inset: 0`, so they stretch themselves to the edges of their nearest positioned ancestor and stick there, like an overprotective tarp.
+- Within a Stack or Shelf, a `<Box>` creates a container. By default, a Box is just big enough to fit its content and does not expand or shrink. If the Boxes within a stack are too big or too numerous to fit onscreen, they will simply overflow and be hidden. If the Boxes within a shelf don't fit in one row, they'll wrap to multiple rows.
+- Boxes have `position: relative`, so a Stack or Shelf inside a Box will stretch to fill the Box.
+- Boxes take the following props:
+  - `expand` tells the Box to fill any leftover space in its parent Stack or Shelf. If the Box's content is too big for the available space, the Box will take its size from its content and overflow its parent.
+  - `clip` (only valid if using `expand`) tells the Box to be _no bigger_ than the available space in its parent. If the Box's content doesn't fit, it will overflow and be hidden.
+  - `scroll` (only valid if using `clip`) tells the Box to display scrollbars if its content overflows.
+  - `style`
 
 ## Features
 

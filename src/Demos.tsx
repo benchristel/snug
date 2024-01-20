@@ -20,8 +20,8 @@ export function Demos() {
 function HeaderMainFooter() {
   return (
     <Stack style={{background: "lightgray"}}>
-      <Cubby>This is the header</Cubby>
-      <Expanse scroll style={{background: "lightgreen"}}>
+      <Box>This is the header</Box>
+      <Box expand clip scroll style={{background: "lightgreen"}}>
         <p>
           In this example, the header and footer are fixed to the top
           and bottom of the viewport.
@@ -31,8 +31,8 @@ function HeaderMainFooter() {
           section scrolls.
         </p>
         <Expander />
-      </Expanse>
-      <Cubby>This is the footer</Cubby>
+      </Box>
+      <Box>This is the footer</Box>
     </Stack>
   )
 }
@@ -40,10 +40,10 @@ function HeaderMainFooter() {
 function HeaderBody() {
   return (
     <Stack style={{background: "lightgray"}}>
-      <Cubby>This is the header</Cubby>
-      <Expanse scroll style={{background: "lightgreen"}}>
+      <Box>This is the header</Box>
+      <Box expand clip scroll style={{background: "lightgreen"}}>
         <Stack>
-          <Cubby expand>
+          <Box expand>
             <p>
               In this example, the header is fixed to the top of the
               screen. The rest of the page scrolls.
@@ -53,14 +53,14 @@ function HeaderBody() {
               the footer sticks to the bottom of the viewport.
             </p>
             <Expander />
-          </Cubby>
-          <Cubby>
+          </Box>
+          <Box>
             <div style={{background: "aliceblue"}}>
               This is the footer
             </div>
-          </Cubby>
+          </Box>
         </Stack>
-      </Expanse>
+      </Box>
     </Stack>
   )
 }
@@ -68,19 +68,19 @@ function HeaderBody() {
 function Sidebar() {
   return (
     <Stack style={{background: "lightgray"}}>
-      <Cubby>This is the header</Cubby>
-      <Expanse scroll style={{background: "lightgreen"}}>
+      <Box>This is the header</Box>
+      <Box expand style={{background: "lightgreen"}}>
         <Shelf>
-          <Cubby>Sidebar</Cubby>
-          <Expanse scroll style={{background: "aliceblue"}}>
+          <Box style={{inlineSize: 100}}>100px wide sidebar</Box>
+          <Box expand clip scroll style={{background: "aliceblue"}}>
             <p>
               In this example, the content scrolls while the sidebar
               and header remain fixed.
             </p>
             <Expander />
-          </Expanse>
+          </Box>
         </Shelf>
-      </Expanse>
+      </Box>
     </Stack>
   )
 }
@@ -159,18 +159,42 @@ function Expanse(props: {
   scroll?: boolean
 }) {
   return (
-    <Cubby expand>
+    <Box expand>
       <Module style={props.style} scroll={props.scroll}>
         {props.children}
       </Module>
-    </Cubby>
+    </Box>
   )
 }
 
-function Cubby(props: {
-  children: ComponentChildren
-  expand?: boolean
-}) {
+type BoxProps =
+  | {
+      expand: true
+      clip: true
+      scroll?: boolean
+      children?: ComponentChildren
+      style?: CSSProperties
+    }
+  | {
+      expand: true
+      clip?: false
+      children?: ComponentChildren
+      style?: CSSProperties
+    }
+  | {
+      expand?: false
+      children?: ComponentChildren
+      style?: CSSProperties
+    }
+
+function Box(props: BoxProps) {
+  if (props.expand && props.clip) {
+    return (
+      <Expanse scroll={props.scroll} style={props.style}>
+        {props.children}
+      </Expanse>
+    )
+  }
   return (
     <div
       style={{
@@ -178,6 +202,7 @@ function Cubby(props: {
         overflow: "hidden",
         flexGrow: props.expand ? 1 : 0,
         flexShrink: 0,
+        ...props.style,
       }}
     >
       {props.children}
