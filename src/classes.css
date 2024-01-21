@@ -1,9 +1,15 @@
 .snug-shelf,
-.snug-stack {
+.snug-stack,
+.snug-tarp {
   position: absolute;
   inset: 0;
 }
 
+/* Without this rule, Boxes with Shelf or Stack children would have
+ * zero height/width because Shelf and Stack are
+ * absolutely-positioned by default. The absolutely-positioned child
+ * would take up no space in the layout.
+ */
 .snug-box:not(.expand) > :is(.snug-shelf, .snug-stack) {
   position: relative;
 }

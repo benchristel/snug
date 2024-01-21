@@ -2,32 +2,17 @@ import {h, ComponentChildren} from "preact"
 import {CSSProperties} from "preact/compat"
 import "./classes.css"
 
-const tarp = {
-  position: "absolute",
-  inset: 0,
-}
-
-export function Module(props: {
-  children: ComponentChildren
-  style?: CSSProperties
-  scroll?: boolean
-}) {
-  const {children, style, scroll} = props
-  const overflow = scroll ? "auto" : "hidden"
-  return <div style={{overflow, ...tarp, ...style}}>{children}</div>
-}
-
 export function Stack(props: {
   children: ComponentChildren
   style?: CSSProperties
 }) {
   return (
     <div
+      class="snug-stack"
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "stretch",
-        ...tarp,
         ...props.style,
       }}
     >
@@ -63,9 +48,9 @@ function Expanse(props: {
 }) {
   return (
     <Box expand>
-      <Module style={props.style} scroll={props.scroll}>
+      <Tarp style={props.style} scroll={props.scroll}>
         {props.children}
-      </Module>
+      </Tarp>
     </Box>
   )
 }
@@ -110,6 +95,20 @@ export function Box(props: BoxProps) {
       }}
     >
       {props.children}
+    </div>
+  )
+}
+
+function Tarp(props: {
+  children: ComponentChildren
+  style?: CSSProperties
+  scroll?: boolean
+}) {
+  const {children, style, scroll} = props
+  const overflow = scroll ? "auto" : "hidden"
+  return (
+    <div class="snug-tarp" style={{overflow, ...style}}>
+      {children}
     </div>
   )
 }
