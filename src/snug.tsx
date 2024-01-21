@@ -58,13 +58,7 @@ export function Box(props: BoxProps) {
   return (
     <div
       class={"snug-box" + (props.expand ? " expand" : "")}
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        flexGrow: props.expand ? 1 : 0,
-        flexShrink: 0,
-        ...props.style,
-      }}
+      style={props.style}
     >
       {props.children}
     </div>

@@ -18,6 +18,16 @@
   flex-wrap: wrap;
 }
 
+.snug-box {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.snug-box.expand {
+  flex-grow: 1;
+}
+
 /* Without this rule, Boxes with Shelf or Stack children would have
  * zero height/width because Shelf and Stack are
  * absolutely-positioned by default. The absolutely-positioned child
