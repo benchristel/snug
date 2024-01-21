@@ -7,15 +7,7 @@ export function Stack(props: {
   style?: CSSProperties
 }) {
   return (
-    <div
-      class="snug-stack"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "stretch",
-        ...props.style,
-      }}
-    >
+    <div class="snug-stack" style={props.style}>
       {props.children}
     </div>
   )
@@ -26,16 +18,7 @@ export function Shelf(props: {
   style?: CSSProperties
 }) {
   return (
-    <div
-      class="snug-shelf"
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "stretch",
-        flexWrap: "wrap",
-        ...props.style,
-      }}
-    >
+    <div class="snug-shelf" style={props.style}>
       {props.children}
     </div>
   )
