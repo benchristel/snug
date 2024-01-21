@@ -2,18 +2,20 @@
 
 A lightweight system of layout components for Preact, inspired by beautiful carpentry.
 
-## The Components
+## Fundamental Components
 
 Snug is a thin but opinionated wrapper around flexbox. It is based around the following concepts:
 
-- `<Stack>` and `<Shelf>` create vertical and horizontal flex containers, respectively. They are absolutely positioned elements with `inset: 0`, so they stretch themselves to the edges of their nearest positioned ancestor and stick there, like an overprotective tarp.
-- Within a Stack or Shelf, a `<Box>` creates a container. By default, a Box is just big enough to fit its content and does not expand or shrink. If the Boxes within a stack are too big or too numerous to fit onscreen, they will simply overflow and be hidden. If the Boxes within a shelf don't fit in one row, they'll wrap to multiple rows.
-- Boxes have `position: relative`, so a Stack or Shelf inside a Box will stretch to fill the Box.
-- Boxes take the following props:
-  - `expand` tells the Box to fill any leftover space in its parent Stack or Shelf. If the Box's content is too big for the available space, the Box will take its size from its content and overflow its parent.
-  - `clip` (only valid if using `expand`) tells the Box to be _no bigger_ than the available space in its parent. If the Box's content doesn't fit, it will overflow and be hidden.
-  - `scroll` (only valid if using `clip`) tells the Box to display scrollbars if its content overflows.
-  - `style`
+- `<Box>`, a relatively positioned block element.
+- `<Shelf>`, which puts boxes side by side in a flex row. A Shelf is as wide as its parent, and as tall as it needs to be to hold its children. If the children of a Shelf don't fit in one row, they'll wrap to multiple rows.
+- `<Split>` and `<Region>` which, as you might expect, split an area of the screen into regions (e.g. sidebar and main content).
+  - All children of a Split must be Regions.
+  - Unlike Box and Shelf, a Split derives its size not from its children but from its parent. Specifically, a Split completely covers its nearest positioned ancestor.
+  - If a Split doesn't have room for all its Regions, they will simply overflow and be hidden.
+  - By default, a Region is only as large as it needs to be to contain its children.
+  - However, regions can be set to `expand`, which will make them expand to fill available space in the Split.
+  - If the children of a Region don't fit within the parent Split, the Region will show a scrollbar.
+- A `<Spring>` is similar to a Box, but expands to fill unused space in its flex parent with `flex-grow: 1`. Used in Shelves and Regions.
 
 ## Features
 
