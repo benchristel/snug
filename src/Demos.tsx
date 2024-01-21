@@ -27,6 +27,9 @@ export function Demos() {
       <Demo>
         <StickyFooterDemo />
       </Demo>
+      <Demo>
+        <HeaderFooterSidebarDemo />
+      </Demo>
       <div style={{clear: "both", height: 400}} />
     </>
   )
@@ -58,41 +61,21 @@ function BoxDemo() {
   )
 }
 
-function StackDemo() {
-  return (
-    <>
-      <h2>Stack</h2>
-      <p>
-        A Stack puts Boxes on top of each other. It derives its width
-        from its parent, and its height from the heights of its
-        children. Here is a Stack with a gray background that contains
-        four colored boxes:
-      </p>
-      <Stack style={{background: "lightgray"}}>
-        <Box style={{background: "pink"}}>red</Box>
-        <Box style={{background: "lightgreen"}}>green</Box>
-        <Box style={{background: "cadetblue"}}>blue</Box>
-        <Box>transparent</Box>
-      </Stack>
-    </>
-  )
-}
-
 function ShelfDemo() {
   return (
     <>
-      <h2>Shelf</h2>
+      <h2>Shelf and Spring</h2>
       <p>
         A Shelf puts Boxes side by side. A shelf is as wide as its
         parent, and as tall as it needs to be to contain its children.
       </p>
       <p>
-        If a Box within a Stack has the <code>expand</code> prop, it
-        grows to fill any space not taken by its siblings.
+        A Spring within a Shelf grows to fill any space not taken by
+        its siblings.
       </p>
       <p>
-        Here is a Shelf with three children. The center child is set
-        to <code>expand</code>, and contains a Stack.
+        Here is a Shelf with three children. The center child is a
+        Spring, and the other two are Boxes.
       </p>
       <Shelf style={{background: "lightgray"}}>
         <Box style={{background: "pink"}}>left</Box>
@@ -265,6 +248,45 @@ function StickyFooterDemo() {
   )
 }
 
+function HeaderFooterSidebarDemo() {
+  return (
+    <Split>
+      <Region style={{background: "#07d", color: "#fff", padding: 6}}>
+        <Shelf>
+          <Spring style={{flexBasis: 0}}>Logo</Spring>
+          <Box>Title</Box>
+          <Spring style={{flexBasis: 0, textAlign: "right"}}>
+            Link Link
+          </Spring>
+        </Shelf>
+      </Region>
+      <Region expand>
+        <Split inline>
+          <Region
+            style={{width: 100, background: "aliceblue", padding: 6}}
+          >
+            sidebar
+          </Region>
+          <Region style={{flexBasis: 1, background: "#444"}} />
+          <Region expand>
+            <Spring style={{padding: 6}}>
+              <p>
+                Finally, here is a complete example of a layout with
+                header, sidebar, and footer.
+              </p>
+              <Expander />
+            </Spring>
+            <Box style={{flexBasis: 1, background: "#999"}} />
+            <Box style={{background: "#ddd", padding: 6}}>
+              This is the footer
+            </Box>
+          </Region>
+        </Split>
+      </Region>
+    </Split>
+  )
+}
+
 function Split(props: {
   children: ComponentChildren
   inline?: boolean
@@ -295,7 +317,7 @@ function Split(props: {
 }
 
 function Region(props: {
-  children: ComponentChildren
+  children?: ComponentChildren
   expand?: boolean
   style?: CSSProperties
 }) {
