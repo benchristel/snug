@@ -24,20 +24,6 @@ export function Shelf(props: {
   )
 }
 
-function Expanse(props: {
-  children?: ComponentChildren
-  style?: CSSProperties
-  scroll?: boolean
-}) {
-  return (
-    <Box expand>
-      <Tarp style={props.style} scroll={props.scroll}>
-        {props.children}
-      </Tarp>
-    </Box>
-  )
-}
-
 type BoxProps =
   | {
       expand: true
@@ -61,11 +47,14 @@ type BoxProps =
 export function Box(props: BoxProps) {
   if (props.expand && props.clip) {
     return (
-      <Expanse scroll={props.scroll} style={props.style}>
-        {props.children}
-      </Expanse>
+      <Box expand>
+        <Tarp style={props.style} scroll={props.scroll}>
+          {props.children}
+        </Tarp>
+      </Box>
     )
   }
+
   return (
     <div
       class={"snug-box" + (props.expand ? " expand" : "")}
