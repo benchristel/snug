@@ -28,6 +28,10 @@
   flex-grow: 1;
 }
 
+.snug-shelf > .snug-box.expand {
+  max-block-size: 100%;
+}
+
 /* Without this rule, Boxes with Shelf or Stack children would have
  * zero height/width because Shelf and Stack are
  * absolutely-positioned by default. The absolutely-positioned child

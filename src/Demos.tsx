@@ -18,6 +18,7 @@ export function Demos() {
       <Demo>
         <MenuBar />
       </Demo>
+      <div style={{clear: "both", height: 400}} />
     </>
   )
 }
@@ -96,19 +97,47 @@ function MenuBar() {
       <Box>
         <Shelf>
           <Box expand clip style={{background: "#fcc"}}>
-            Left
+            logo
           </Box>
-          <Box style={{background: "#afa"}}>Center</Box>
+          <Box style={{background: "#afa"}}>title</Box>
           <Box
             expand
             clip
             style={{background: "#cdf", textAlign: "right"}}
           >
-            Right --------
+            link link link
           </Box>
         </Shelf>
       </Box>
-      <Box expand style={{background: "lightgreen"}}></Box>
+      <Box expand style={{background: "lightgreen"}}>
+        <p>
+          The header has a left-aligned logo, centered title, and
+          right-aligned links.
+        </p>
+        <p>
+          If there is not enough space for the links to fit on one
+          line, they wrap.
+        </p>
+        <p>The footer contains 3 colored areas of equal width.</p>
+        <p>
+          If the content does not fit onscreen, the whole page
+          scrolls.
+        </p>
+        <Expander />
+      </Box>
+      <Box>
+        <Shelf>
+          <Box expand clip style={{background: "#fcc"}}>
+            &nbsp;
+          </Box>
+          <Box expand clip style={{background: "#afa"}}>
+            &nbsp;
+          </Box>
+          <Box expand clip style={{background: "#cdf"}}>
+            &nbsp;
+          </Box>
+        </Shelf>
+      </Box>
     </Stack>
   )
 }

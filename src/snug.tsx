@@ -47,10 +47,15 @@ type BoxProps =
 export function Box(props: BoxProps) {
   if (props.expand && props.clip) {
     return (
-      <Box expand>
-        <Tarp style={props.style} scroll={props.scroll}>
-          {props.children}
-        </Tarp>
+      <Box
+        expand
+        style={{
+          flexBasis: 0,
+          overflow: props.scroll ? "auto" : "hidden",
+          ...props.style,
+        }}
+      >
+        {props.children}
       </Box>
     )
   }
@@ -61,20 +66,6 @@ export function Box(props: BoxProps) {
       style={props.style}
     >
       {props.children}
-    </div>
-  )
-}
-
-function Tarp(props: {
-  children: ComponentChildren
-  style?: CSSProperties
-  scroll?: boolean
-}) {
-  const {children, style, scroll} = props
-  const overflow = scroll ? "auto" : "hidden"
-  return (
-    <div class="snug-tarp" style={{overflow, ...style}}>
-      {children}
     </div>
   )
 }
