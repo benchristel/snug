@@ -7,14 +7,6 @@ interface BasicProps {
   style?: CSSProperties
 }
 
-export function Stack(props: BasicProps) {
-  return (
-    <div class="snug-stack" style={props.style}>
-      {props.children}
-    </div>
-  )
-}
-
 export function Shelf(props: BasicProps) {
   return (
     <div class="snug-shelf" style={props.style}>

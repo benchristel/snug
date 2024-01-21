@@ -1,7 +1,6 @@
 import {h, Fragment, ComponentChildren} from "preact"
-import {CSSProperties} from "preact/compat"
 import "./classes.css"
-import {Box, Region, Shelf, Split, Spring, Stack} from "./snug"
+import {Box, Region, Shelf, Split, Spring} from "./snug"
 
 export function Demos() {
   return (
