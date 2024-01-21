@@ -1,63 +1,9 @@
-:root {
-  --min-scroll-container-height: 60px;
+.snug-shelf,
+.snug-stack {
+  position: absolute;
+  inset: 0;
 }
 
-.snug {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-/* if this class is present, the element will expand to fill available space
- * in its (flex) parent.
- */
-.snug.snug-expand {
-  flex-grow: 1;
-}
-
-/* if the content is too large for the available space in the (flex) parent
- * of this element, the element will stretch to accommodate the content, possibly
- * overflowing the parent. The parent should be made scrollable, or the content
- * will be hidden.
- */
-.snug.snug-if-large-content-stretch {
-  flex-shrink: 0;
-}
-
-/* if the content is too large for the available space in the (flex) parent
- * of this element, the element will take a share of the available space and
- * display a scrollbar.
- */
-.snug.snug-if-large-content-scroll {
-  flex-basis: var(--min-scroll-container-height);
-  overflow: auto;
-}
-
-.snug.snug-if-large-content-scroll.snug-fixed-height {
-  flex-basis: auto;
-}
-
-/* if the element is set to expand as well as scroll, set the flex basis to a small
- * value. Otherwise, the parent element will derive its own flex basis based on the
- * intrinsic size of this element's content, and scrollbars will not appear; the
- * parent will grow instead.
- */
-
-.snug.snug-layout-children-row {
-  flex-direction: row;
-}
-
-.snug.snug-layout-children-row-wrap {
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.snug.snug-layout-children-column {
-  flex-direction: column;
-}
-
-.snug.snug-layout-children-typography {
-  display: block;
+.snug-box:not(.expand) > :is(.snug-shelf, .snug-stack) {
+  position: relative;
 }

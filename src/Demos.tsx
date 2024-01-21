@@ -1,5 +1,6 @@
 import {h, Fragment, ComponentChildren} from "preact"
 import {CSSProperties} from "preact/compat"
+import "./classes.css"
 
 export function Demos() {
   return (
@@ -12,6 +13,9 @@ export function Demos() {
       </Demo>
       <Demo>
         <Sidebar />
+      </Demo>
+      <Demo>
+        <MenuBar />
       </Demo>
     </>
   )
@@ -85,6 +89,29 @@ function Sidebar() {
   )
 }
 
+function MenuBar() {
+  return (
+    <Stack style={{background: "lightgray"}}>
+      <Box>
+        <Shelf>
+          <Box expand clip style={{background: "#fcc"}}>
+            Left
+          </Box>
+          <Box style={{background: "#afa"}}>Center</Box>
+          <Box
+            expand
+            clip
+            style={{background: "#cdf", textAlign: "right"}}
+          >
+            Right --------
+          </Box>
+        </Shelf>
+      </Box>
+      <Box expand style={{background: "lightgreen"}}></Box>
+    </Stack>
+  )
+}
+
 function Expander() {
   return (
     <details>
@@ -139,12 +166,12 @@ function Shelf(props: {
 }) {
   return (
     <div
+      class="snug-shelf"
       style={{
         display: "flex",
         flexDirection: "row",
         alignItems: "stretch",
         flexWrap: "wrap",
-        ...tarp,
         ...props.style,
       }}
     >
@@ -197,6 +224,7 @@ function Box(props: BoxProps) {
   }
   return (
     <div
+      class={"snug-box" + (props.expand ? " expand" : "")}
       style={{
         position: "relative",
         overflow: "hidden",
