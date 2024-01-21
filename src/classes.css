@@ -1,14 +1,11 @@
 .snug-shelf,
-.snug-stack,
-.snug-tarp {
-  position: absolute;
-  inset: 0;
+.snug-stack {
+  display: flex;
+  align-items: stretch;
 }
 
 .snug-stack {
-  display: flex;
   flex-direction: column;
-  align-items: stretch;
 }
 
 .snug-shelf {
@@ -18,25 +15,38 @@
   flex-wrap: wrap;
 }
 
-.snug-box {
+.snug-box,
+.snug-spring {
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
 }
 
-.snug-box.expand {
+.snug-spring {
   flex-grow: 1;
 }
 
-.snug-shelf > .snug-box.expand {
-  max-block-size: 100%;
+.snug-region {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow: auto;
 }
 
-/* Without this rule, Boxes with Shelf or Stack children would have
- * zero height/width because Shelf and Stack are
- * absolutely-positioned by default. The absolutely-positioned child
- * would take up no space in the layout.
- */
-.snug-box:not(.expand) > :is(.snug-shelf, .snug-stack) {
+.snug-region-outer {
   position: relative;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.snug-region-inner {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+}
+
+.snug-region,
+.snug-region-inner {
+  display: flex;
+  flex-direction: column;
 }

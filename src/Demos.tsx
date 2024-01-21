@@ -7,138 +7,321 @@ export function Demos() {
   return (
     <>
       <Demo>
-        <HeaderMainFooter />
+        <BoxDemo />
       </Demo>
       <Demo>
-        <HeaderBody />
+        <ShelfDemo />
       </Demo>
       <Demo>
-        <Sidebar />
+        <ShelfWrapDemo />
       </Demo>
       <Demo>
-        <MenuBar />
+        <SplitDemo />
+      </Demo>
+      <Demo>
+        <SplitOverflowDemo />
+      </Demo>
+      <Demo>
+        <RegionOverflowDemo />
+      </Demo>
+      <Demo>
+        <StickyFooterDemo />
       </Demo>
       <div style={{clear: "both", height: 400}} />
     </>
   )
 }
 
-function HeaderMainFooter() {
+function BoxDemo() {
   return (
-    <Stack style={{background: "lightgray"}}>
-      <Box>This is the header</Box>
-      <Box expand clip scroll style={{background: "lightgreen"}}>
-        <p>
-          In this example, the header and footer are fixed to the top
-          and bottom of the viewport.
-        </p>
-        <p>
-          When the content is too big to fit on screen, this middle
-          section scrolls.
-        </p>
-        <Expander />
+    <>
+      <h2>Box</h2>
+      <p>A Box is a relatively positioned block element.</p>
+      <p>
+        Absolutely positioned descendents of a Box stick to the Box.
+      </p>
+      <p>
+        Here is a 100px-tall Box with absolutely positioned elements
+        at its corners.
+      </p>
+      <Box style={{height: 100, background: "lightgray"}}>
+        <div style={{position: "absolute", top: 0, left: 0}}>NW</div>
+        <div style={{position: "absolute", top: 0, right: 0}}>NE</div>
+        <div style={{position: "absolute", bottom: 0, left: 0}}>
+          SW
+        </div>
+        <div style={{position: "absolute", bottom: 0, right: 0}}>
+          SE
+        </div>
       </Box>
-      <Box>This is the footer</Box>
-    </Stack>
+    </>
   )
 }
 
-function HeaderBody() {
+function StackDemo() {
   return (
-    <Stack style={{background: "lightgray"}}>
-      <Box>This is the header</Box>
-      <Box expand clip scroll style={{background: "lightgreen"}}>
-        <Stack>
-          <Box expand>
-            <p>
-              In this example, the header is fixed to the top of the
-              screen. The rest of the page scrolls.
-            </p>
-            <p>
-              If the content is too small to occupy the entire screen,
-              the footer sticks to the bottom of the viewport.
-            </p>
-            <Expander />
-          </Box>
-          <Box>
-            <div style={{background: "aliceblue"}}>
-              This is the footer
-            </div>
-          </Box>
-        </Stack>
-      </Box>
-    </Stack>
+    <>
+      <h2>Stack</h2>
+      <p>
+        A Stack puts Boxes on top of each other. It derives its width
+        from its parent, and its height from the heights of its
+        children. Here is a Stack with a gray background that contains
+        four colored boxes:
+      </p>
+      <Stack style={{background: "lightgray"}}>
+        <Box style={{background: "pink"}}>red</Box>
+        <Box style={{background: "lightgreen"}}>green</Box>
+        <Box style={{background: "cadetblue"}}>blue</Box>
+        <Box>transparent</Box>
+      </Stack>
+    </>
   )
 }
 
-function Sidebar() {
+function ShelfDemo() {
   return (
-    <Stack style={{background: "lightgray"}}>
-      <Box>This is the header</Box>
-      <Box expand style={{background: "lightgreen"}}>
-        <Shelf>
-          <Box style={{inlineSize: 100}}>100px wide sidebar</Box>
-          <Box expand clip scroll style={{background: "aliceblue"}}>
-            <p>
-              In this example, the content scrolls while the sidebar
-              and header remain fixed.
-            </p>
-            <Expander />
-          </Box>
-        </Shelf>
-      </Box>
-    </Stack>
+    <>
+      <h2>Shelf</h2>
+      <p>
+        A Shelf puts Boxes side by side. A shelf is as wide as its
+        parent, and as tall as it needs to be to contain its children.
+      </p>
+      <p>
+        If a Box within a Stack has the <code>expand</code> prop, it
+        grows to fill any space not taken by its siblings.
+      </p>
+      <p>
+        Here is a Shelf with three children. The center child is set
+        to <code>expand</code>, and contains a Stack.
+      </p>
+      <Shelf style={{background: "lightgray"}}>
+        <Box style={{background: "pink"}}>left</Box>
+        <Spring style={{textAlign: "center"}}>
+          <Box>top</Box>
+          <Box>bottom</Box>
+        </Spring>
+        <Box style={{background: "cadetblue"}}>right</Box>
+      </Shelf>
+    </>
   )
 }
 
-function MenuBar() {
+function ShelfWrapDemo() {
   return (
-    <Stack style={{background: "lightgray"}}>
-      <Box>
-        <Shelf>
-          <Box expand clip style={{background: "#fcc"}}>
-            logo
-          </Box>
-          <Box style={{background: "#afa"}}>title</Box>
-          <Box
-            expand
-            clip
-            style={{background: "#cdf", textAlign: "right"}}
-          >
-            link link link
-          </Box>
-        </Shelf>
+    <>
+      <h2>Shelf Wrapping</h2>
+      <p>
+        If the children of a Shelf don't fit in one row, they'll wrap
+        to multiple rows.
+      </p>
+      <p>
+        Each child stretches to the height of its tallest sibling in
+        the same row.
+      </p>
+      <Shelf style={{background: "lightgray"}}>
+        <Box style={{background: "pink"}}>one ...</Box>
+        <Box style={{background: "lightgreen"}}>
+          two ...
+          <br />
+          and a half
+        </Box>
+        <Box style={{background: "cadetblue"}}>three ...</Box>
+        <Box style={{background: "pink"}}>four ...</Box>
+        <Box style={{background: "lightgreen"}}>five ...</Box>
+        <Box style={{background: "cadetblue"}}>six ...</Box>
+        <Box style={{background: "pink"}}>seven ...</Box>
+        <Box style={{background: "lightgreen"}}>eight ...</Box>
+        <Box style={{background: "cadetblue"}}>nine ...</Box>
+        <Box style={{background: "pink"}}>ten ...</Box>
+      </Shelf>
+    </>
+  )
+}
+
+function SplitDemo() {
+  return (
+    <>
+      <h2>Split</h2>
+      <p>
+        A Split divides a layout into regions. It is absolutely
+        positioned, and entirely covers its nearest positioned
+        ancestor (or the viewport, if no ancestor is positioned). A
+        split can be top-bottom or left-right.
+      </p>
+      <p>
+        Here is an 80px-tall box split into top and bottom regions.
+        The bottom region is set to <code>expand</code>.
+      </p>
+      <p>
+        The bottom region is split into left and right regions. The
+        right region is set to <code>expand</code>.
+      </p>
+
+      <Box style={{height: 80}}>
+        <Split>
+          <Region style={{background: "pink"}}>top</Region>
+          <Region expand style={{background: "lightgreen"}}>
+            <Split inline>
+              <Region style={{background: "aliceblue"}}>Left</Region>
+              <Region expand>Right</Region>
+            </Split>
+          </Region>
+        </Split>
       </Box>
-      <Box expand style={{background: "lightgreen"}}>
-        <p>
-          The header has a left-aligned logo, centered title, and
-          right-aligned links.
-        </p>
-        <p>
-          If there is not enough space for the links to fit on one
-          line, they wrap.
-        </p>
-        <p>The footer contains 3 colored areas of equal width.</p>
-        <p>
-          If the content does not fit onscreen, the whole page
-          scrolls.
-        </p>
-        <Expander />
+    </>
+  )
+}
+
+function SplitOverflowDemo() {
+  return (
+    <>
+      <h2>Split Overflowing</h2>
+      <p>
+        If a Split doesn't have room for all its children, they simply
+        overflow and are hidden.
+      </p>
+
+      <Box style={{height: 87}}>
+        <Split>
+          <Region style={{background: "pink"}}>one</Region>
+          <Region style={{background: "lightgreen"}}>two</Region>
+          <Region style={{background: "aliceblue"}}>three</Region>
+          <Region style={{background: "pink"}}>four</Region>
+          <Region style={{background: "lightgreen"}}>five</Region>
+          <Region style={{background: "aliceblue"}}>six</Region>
+        </Split>
       </Box>
-      <Box>
-        <Shelf>
-          <Box expand clip style={{background: "#fcc"}}>
-            &nbsp;
-          </Box>
-          <Box expand clip style={{background: "#afa"}}>
-            &nbsp;
-          </Box>
-          <Box expand clip style={{background: "#cdf"}}>
-            &nbsp;
-          </Box>
-        </Shelf>
+    </>
+  )
+}
+
+function RegionOverflowDemo() {
+  return (
+    <>
+      <h2>Region Overflowing</h2>
+      <p>
+        If a region is too small to hold all its content, it scrolls.
+      </p>
+
+      <Box style={{height: 120}}>
+        <Split inline>
+          <Region style={{background: "pink", width: 50}}>
+            <p>one</p>
+            <p>two</p>
+            <p>three</p>
+            <p>four</p>
+            <p>five</p>
+            <p>six</p>
+          </Region>
+          <Region expand style={{background: "lightgreen"}}>
+            <p>
+              Lorem ipsum dolor sit amet. If a region is too small to
+              hold all its content, it scrolls. Lorem ipsum dolor sit
+              amet. If a region is too small to hold all its content,
+              it scrolls. Lorem ipsum dolor sit amet. If a region is
+              too small to hold all its content, it scrolls. Lorem
+              ipsum dolor sit amet. If a region is too small to hold
+              all its content, it scrolls.
+            </p>
+          </Region>
+        </Split>
       </Box>
-    </Stack>
+    </>
+  )
+}
+
+function StickyFooterDemo() {
+  return (
+    <>
+      <h2>Region Layout</h2>
+      <p>
+        Regions have{" "}
+        <code>display: flex; flex-direction: column</code>. Within a
+        region, you can use a Spring and a Box to create a footer that
+        sticks to the bottom of the Region.
+      </p>
+
+      <Box style={{height: 120}}>
+        <Split inline>
+          <Region style={{background: "pink", width: 50}}>
+            <p>one</p>
+            <p>two</p>
+            <p>three</p>
+            <p>four</p>
+            <p>five</p>
+            <p>six</p>
+          </Region>
+          <Region expand style={{background: "lightgreen"}}>
+            <Spring>
+              <Expander />
+            </Spring>
+            <Box style={{background: "cadetblue"}}>
+              This is the footer.
+            </Box>
+          </Region>
+        </Split>
+      </Box>
+    </>
+  )
+}
+
+function Split(props: {
+  children: ComponentChildren
+  inline?: boolean
+}) {
+  if (Array.isArray(props.children)) {
+    if (props.children.some(({type}) => type !== Region)) {
+      return <div>Error: children of Split should be Regions</div>
+    }
+  } else {
+    if ((props.children as any)?.type !== Region) {
+      return <div>Error: children of Split should be Regions</div>
+    }
+  }
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        flexDirection: props.inline ? "row" : "column",
+        alignItems: "stretch",
+      }}
+    >
+      {props.children}
+    </div>
+  )
+}
+
+function Region(props: {
+  children: ComponentChildren
+  expand?: boolean
+  style?: CSSProperties
+}) {
+  if (!props.expand) {
+    return (
+      <div class="snug-region" style={props.style}>
+        {props.children}
+      </div>
+    )
+  }
+
+  return (
+    <div class="snug-region-outer" style={props.style}>
+      <div class="snug-region-inner">{props.children}</div>
+    </div>
+  )
+}
+
+function Spring(props: {
+  children: ComponentChildren
+  style?: CSSProperties
+}) {
+  return (
+    <div class="snug-spring" style={props.style}>
+      {props.children}
+    </div>
   )
 }
 
