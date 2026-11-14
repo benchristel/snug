@@ -17,6 +17,13 @@ Snug is a thin but opinionated wrapper around flexbox. It is based around the fo
   - If the children of a Region don't fit within the parent Split, the Region will show a scrollbar.
 - A `<Spring>` is similar to a Box, but expands to fill unused space in its flex parent with `flex-grow: 1`. Used in Shelves and Regions.
 
+## Convenience Components
+
+The convenience components compose and configure the fundamental ones.
+
+- HeaderBody
+- Sidebar
+
 ## Features
 
 - Compatible with right-to-left layouts by default
